@@ -1,7 +1,7 @@
 
 # Fake SMTP Server
 
-Fake SMTP Server is an email testing tool for QA & development teams. 
+Fake SMTP Server is an email testing tool for QA & development teams.
 It allows manual testing in a web interface, and automated testing via an API.
 
 ## Docker image
@@ -53,7 +53,7 @@ You can filter emails with the following parameters:
  * `to`: filter recipient
  * `since`: filter email date
  * `until`: filter email date
- 
+
 Example:
 
 ```
@@ -62,7 +62,7 @@ Example:
 
 ##### Viewing headers in responses
 
-By default, fake-smtp-server will not capture custom headers in emails. To enable headers, start the server with the `--headers` flag. If enabled, headers will be serialized as an object type. 
+By default, fake-smtp-server will not capture custom headers in emails. To enable headers, start the server with the `--headers` flag. If enabled, headers will be serialized as an object type.
 
 For reference for what headers look like, consult [Nodemailer's documentation](https://nodemailer.com/extras/mailparser/#headers-map), but keep in mind that the HTTP endpoint returns plain JSON objects rather than `Map`s.
 
@@ -71,7 +71,7 @@ For reference for what headers look like, consult [Nodemailer's documentation](h
 To remove all emails without restarting the server:
 ```
     DELETE http://localhost:1080/api/emails
-``` 
+```
 
 
 ## Web interface
@@ -91,17 +91,27 @@ Usage:
   fake-smtp-server [OPTIONS] [ARGS]
 
 Options:
-  -s, --smtp-port [NUMBER] SMTP port to listen on (Default is 1025)
-      --smtp-ip [IP]       IP Address to bind SMTP service to (Default is 0.0.0.0)
-  -h, --http-port [NUMBER] HTTP port to listen on (Default is 1080)
-      --http-ip [IP]       IP Address to bind HTTP service to (Default is 0.0.0.0)
-  -w, --whitelist STRING   Only accept e-mails from these adresses. Accepts
-                           multiple e-mails comma-separated
-  -m, --max [NUMBER]       Max number of e-mails to keep (Default is 100)
-  -a, --auth STRING        Enable Authentication
-      --headers            Enable headers in responses
-  -k, --no-color           Omit color from output
-      --debug              Show debug information
+  -s, --smtp-port [NUMBER]  SMTP port to listen on (Default is 1025)
+      --smtp-ip [IP]        IP Address to bind SMTP service to (Default is 0.0.0.0)
+  -h, --http-port [NUMBER]  HTTP port to listen on (Default is 1080)
+      --http-ip [IP]        IP Address to bind HTTP service to (Default is 0.0.0.0)
+  -w, --whitelist STRING    Only accept e-mails from these adresses. Accepts
+                            multiple e-mails comma-separated
+  -m, --max [NUMBER]        Max number of e-mails to keep (Default is 100)
+  -a, --auth STRING         Enable Authentication
+      --secure              Enable Secure option (require SSL connection)
+      --keystore STRING     Path to PKCS12 keystore used for Secure option or when
+                            using STARTTLS
+  -p, --passphrase STRING   Passphrase for PKCS12 private key
+      --smtpAuth STRING     Enable SMTP authentication. Accepts a
+                            comma-separated list of username:password pairs
+                            that are permitted. Setting this makes
+                            authentication required
+      --headers             Enable headers in responses
+  -k, --no-color            Omit color from output
+      --debug               Show debug information
+  -c, --catch               Catch unanticipated errors
+
 ```
 
 ## Configure fake-smtp-server to run as a service at startup
